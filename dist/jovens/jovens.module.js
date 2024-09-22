@@ -11,24 +11,16 @@ const common_1 = require("@nestjs/common");
 const jovem_entity_1 = require("./jovem.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const jovens_service_1 = require("./jovens.service");
-const jovens_controller_1 = require("./jovens.controller");
 const jovem_repository_1 = require("./jovem.repository");
-const validador_idade_module_1 = require("./validadores/validador-idade.module");
+const validador_idade_1 = require("./validadores/validador-idade");
 let JovensModule = class JovensModule {
 };
 exports.JovensModule = JovensModule;
 exports.JovensModule = JovensModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            typeorm_1.TypeOrmModule.forFeature([jovem_entity_1.Jovem]),
-            validador_idade_module_1.ValidadorIdadeModule
-        ],
-        controllers: [jovens_controller_1.JovensController],
-        providers: [
-            jovens_service_1.JovensService,
-            jovem_repository_1.JovemRepository,
-        ],
-        exports: [jovens_service_1.JovensService],
+        imports: [typeorm_1.TypeOrmModule.forFeature([jovem_entity_1.Jovem])],
+        providers: [jovem_repository_1.JovemRepository, jovens_service_1.JovensService, validador_idade_1.ValidadorIdade],
+        exports: [jovens_service_1.JovensService, jovem_repository_1.JovemRepository],
     })
 ], JovensModule);
 //# sourceMappingURL=jovens.module.js.map

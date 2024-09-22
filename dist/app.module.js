@@ -13,6 +13,7 @@ const app_service_1 = require("./app.service");
 const jovens_module_1 = require("./jovens/jovens.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const jovem_entity_1 = require("./jovens/jovem.entity");
+const jovens_controller_1 = require("./jovens/jovens.controller");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -31,7 +32,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             jovens_module_1.JovensModule,
         ],
-        controllers: [app_controller_1.AppController],
+        controllers: [app_controller_1.AppController, jovens_controller_1.JovensController],
         providers: [app_service_1.AppService],
     })
 ], AppModule);

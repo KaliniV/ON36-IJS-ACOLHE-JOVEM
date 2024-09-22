@@ -12,7 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Jovem = void 0;
 const typeorm_1 = require("typeorm");
 const genero_enum_1 = require("./genero.enum");
+const bcrypt = require("bcrypt");
 let Jovem = class Jovem {
+    async checarSenha(senha) {
+        const hash = await bcrypt.hash(senha, this.criptografia);
+        return hash == this.senha;
+    }
 };
 exports.Jovem = Jovem;
 __decorate([

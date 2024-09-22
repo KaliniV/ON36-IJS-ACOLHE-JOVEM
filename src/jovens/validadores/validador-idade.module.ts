@@ -3,6 +3,6 @@ import { ValidadorIdade } from './validador-idade';
 
 @Module({
   providers: [ValidadorIdade],
-  exports: [ValidadorIdade], // Exporta o provider para que outros módulos possam usá-lo
+  exports: [ValidadorIdade],
 })
 export class ValidadorIdadeModule {}

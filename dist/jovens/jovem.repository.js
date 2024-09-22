@@ -52,6 +52,27 @@ let JovemRepository = class JovemRepository {
             }
         }
     }
+    async exibirPorCredencial(credenciaisDto) {
+        const { email, senha } = credenciaisDto;
+        const jovem = await this.jovemRepository.findOne({
+            where: { email, status: true },
+        });
+        if (jovem && (await jovem.checarSenha(senha))) {
+            return { nome: jovem.nome, email: jovem.email, genero: jovem.genero };
+        }
+        return null;
+    }
+    async findByEmail(email) {
+        return await this.jovemRepository.findOne({
+            where: { email, status: true },
+        });
+    }
+    async save(jovem) {
+        return await this.jovemRepository.save(jovem);
+    }
+    async delete(id) {
+        await this.jovemRepository.delete(id);
+    }
     async hashPassword(senha, criptografia) {
         return bcrypt.hash(senha, criptografia);
     }

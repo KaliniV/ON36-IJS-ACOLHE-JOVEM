@@ -1,5 +1,6 @@
 import {
   Column,
+  ConnectionCheckOutStartedEvent,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
@@ -7,6 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Genero } from './genero.enum';
+import * as bcrypt from 'bcrypt';
 @Entity()
 @Unique(['email'])
 export class Jovem {
@@ -29,7 +31,7 @@ export class Jovem {
     type: 'enum',
     enum: Genero,
   })
-  genero: Genero; // Certifique-se de que o campo está configurado para o tipo enum
+  genero: Genero;
 
   @Column({
     type: 'date',
@@ -51,6 +53,9 @@ export class Jovem {
 
   @UpdateDateColumn()
   atualizadoEm: Date;
+
+  async checarSenha(senha: string): Promise<boolean> {
+    const hash = await bcrypt.hash(senha, this.criptografia);
+    return hash == this.senha;
+  }
 }
-
-

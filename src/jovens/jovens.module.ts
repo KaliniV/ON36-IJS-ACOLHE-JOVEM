@@ -1,21 +1,12 @@
-import { Module, Controller } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { Jovem } from './jovem.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JovensService } from './jovens.service';
-import { JovensController } from './jovens.controller';
 import { JovemRepository } from './jovem.repository';
-import { ValidadorIdadeModule } from './validadores/validador-idade.module';
-
+import { ValidadorIdade } from './validadores/validador-idade';
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Jovem]),
-    ValidadorIdadeModule
-  ],
-  controllers: [JovensController],
-  providers: [
-    JovensService,
-    JovemRepository, // Registra o repositório customizado como um provider
-  ],
-  exports: [JovensService],
+  imports: [TypeOrmModule.forFeature([Jovem])],
+  providers: [JovemRepository, JovensService, ValidadorIdade],
+  exports: [JovensService, JovemRepository],
 })
 export class JovensModule {}

@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { JovensModule } from './jovens/jovens.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Jovem } from './jovens/jovem.entity';
+import { ConfigModule } from '@nestjs/config';
+import { JovensController } from './jovens/jovens.controller';
 
 @Module({
   imports: [
@@ -19,7 +21,7 @@ import { Jovem } from './jovens/jovem.entity';
     }),
     JovensModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, JovensController],
   providers: [AppService],
 })
 export class AppModule {}

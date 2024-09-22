@@ -12,4 +12,5 @@ export declare class Jovem {
     recuperarToken: string;
     criadoEm: Date;
     atualizadoEm: Date;
+    checarSenha(senha: string): Promise<boolean>;
 }

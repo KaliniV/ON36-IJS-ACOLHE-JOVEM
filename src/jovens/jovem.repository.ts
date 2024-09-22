@@ -2,17 +2,14 @@ import { Repository } from 'typeorm';
 import { Jovem } from './jovem.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
-  BadRequestException,
   ConflictException,
   Injectable,
   InternalServerErrorException,
-  UnprocessableEntityException,
 } from '@nestjs/common';
 import { CriarJovemDto } from './criar-jovem-dto';
-import { Genero } from './genero.enum';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
-import { ValidadorIdade } from './validadores/validador-idade';
+import { CredenciaisDto } from './credenciais-dto';
 
 @Injectable()
 export class JovemRepository {
@@ -20,7 +17,6 @@ export class JovemRepository {
     @InjectRepository(Jovem)
     private readonly jovemRepository: Repository<Jovem>,
   ) {}
-
   async criarJovem(criarJovemDto: CriarJovemDto): Promise<Jovem> {
     const { nome, email, senha, genero, dataNascimento } = criarJovemDto;
 
@@ -54,6 +50,32 @@ export class JovemRepository {
     }
   }
 
+  async exibirPorCredencial(
+    credenciaisDto: CredenciaisDto,
+  ): Promise<{ nome: string; email: string; genero: string } | null> {
+    const { email, senha } = credenciaisDto;
+
+    const jovem = await this.jovemRepository.findOne({
+      where: { email, status: true },
+    });
+
+    if (jovem && (await jovem.checarSenha(senha))) {
+      return { nome: jovem.nome, email: jovem.email, genero: jovem.genero };
+    }
+    return null;
+  }
+  async findByEmail(email: string): Promise<Jovem | null> {
+    return await this.jovemRepository.findOne({
+      where: { email, status: true },
+    });
+  }
+  async save(jovem: Jovem): Promise<Jovem> {
+    return await this.jovemRepository.save(jovem);
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.jovemRepository.delete(id);
+  }
   private async hashPassword(
     senha: string,
     criptografia: string,

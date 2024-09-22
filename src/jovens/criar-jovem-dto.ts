@@ -30,8 +30,8 @@ export class CriarJovemDto {
   genero: Genero;
 
   @IsNotEmpty()
-  @IsString() // A data é uma string
-  @IsDateString() // Valida o formato da data como ISO
-  @Type(() => String) // Garante que seja transformado para string
+  @IsString()
+  @IsDateString()
+  @Type(() => String)
   dataNascimento: string;
 }

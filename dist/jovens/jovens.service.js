@@ -29,6 +29,42 @@ let JovensService = class JovensService {
             dataNascimento: dataNascimento.toISOString(),
         });
     }
+    async exibirPorCredencial(credenciaisDto) {
+        return this.jovemRepository.exibirPorCredencial(credenciaisDto);
+    }
+    async atualizarPorCredencial(credenciaisDto, atualizarJovemDto) {
+        const { email, senha } = credenciaisDto;
+        const jovem = await this.jovemRepository.exibirPorCredencial(credenciaisDto);
+        if (!jovem) {
+            throw new common_1.UnauthorizedException('Credenciais inválidas');
+        }
+        const jovemParaAtualizar = await this.jovemRepository.findByEmail(email);
+        const { nome, status } = atualizarJovemDto;
+        jovemParaAtualizar.nome = nome ? nome : jovemParaAtualizar.nome;
+        jovemParaAtualizar.status =
+            status === undefined ? jovemParaAtualizar.status : status;
+        try {
+            await this.jovemRepository.save(jovemParaAtualizar);
+            return jovemParaAtualizar;
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException('Erro ao salvar os dados');
+        }
+    }
+    async deletarPorCredencial(credenciaisDto) {
+        const { email, senha } = credenciaisDto;
+        const jovem = await this.jovemRepository.exibirPorCredencial(credenciaisDto);
+        if (!jovem) {
+            throw new common_1.UnauthorizedException('Credenciais inválidas');
+        }
+        const jovemParaDeletar = await this.jovemRepository.findByEmail(email);
+        try {
+            await this.jovemRepository.delete(jovemParaDeletar.id);
+        }
+        catch (error) {
+            throw new common_1.InternalServerErrorException('Erro ao deletar os dados');
+        }
+    }
 };
 exports.JovensService = JovensService;
 exports.JovensService = JovensService = __decorate([
