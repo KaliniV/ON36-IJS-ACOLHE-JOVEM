@@ -14,6 +14,7 @@ const jovens_module_1 = require("./jovens/jovens.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const jovem_entity_1 = require("./jovens/jovem.entity");
 const jovens_controller_1 = require("./jovens/jovens.controller");
+require('dotenv').config();
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -22,11 +23,11 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
-                host: 'localhost',
+                host: process.env.DB_HOST,
                 port: 6001,
-                database: 'acolhe_jovem',
-                username: 'postgres',
-                password: '123456',
+                database: process.env.DB_DATABASE,
+                username: process.env.DB_USER,
+                password: process.env.DB_PASSWORD,
                 entities: [jovem_entity_1.Jovem],
                 synchronize: true,
             }),
