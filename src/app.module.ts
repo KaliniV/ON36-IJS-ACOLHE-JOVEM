@@ -5,6 +5,10 @@ import { JovensModule } from './jovens/jovens.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Jovem } from './jovens/jovem.entity';
 import { JovensController } from './jovens/jovens.controller';
+import { VoluntariosModule } from './voluntarios/voluntarios.module';
+import { Voluntario } from './voluntarios/voluntario.entity';
+import { VoluntariosController } from './voluntarios/voluntarios.controller';
+import { VoluntariosService } from './voluntarios/voluntarios.service';
 require('dotenv').config();
 @Module({
   imports: [
@@ -15,12 +19,13 @@ require('dotenv').config();
       database: process.env.DB_DATABASE,
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      entities: [Jovem],
+      entities: [Jovem, Voluntario],
       synchronize: true,
     }),
     JovensModule,
+    VoluntariosModule,
   ],
-  controllers: [AppController, JovensController],
-  providers: [AppService],
+  controllers: [AppController, JovensController, VoluntariosController],
+  providers: [AppService, VoluntariosService],
 })
 export class AppModule {}
