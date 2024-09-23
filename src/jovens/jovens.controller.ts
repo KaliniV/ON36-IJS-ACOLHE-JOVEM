@@ -1,4 +1,12 @@
-import { Body, Controller, Post, Get, Patch, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Patch,
+  Delete,
+  ValidationPipe,
+} from '@nestjs/common';
 import { JovensService } from './jovens.service';
 import { CriarJovemDto } from './criar-jovem-dto';
 import { RetornarJovemDto } from './retornar-jovem-dto';
@@ -11,7 +19,7 @@ export class JovensController {
 
   @Post('criar-jovem')
   async criarJovem(
-    @Body() criarJOvemDto: CriarJovemDto,
+    @Body(ValidationPipe) criarJOvemDto: CriarJovemDto,
   ): Promise<RetornarJovemDto> {
     const jovem = await this.jovensService.criarJovem(criarJOvemDto);
     return {

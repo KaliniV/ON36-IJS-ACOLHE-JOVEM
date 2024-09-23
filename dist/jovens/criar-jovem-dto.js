@@ -17,22 +17,30 @@ class CriarJovemDto {
 }
 exports.CriarJovemDto = CriarJovemDto;
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Informe o nome do usuário' }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CriarJovemDto.prototype, "nome", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Informe um endereço de email' }),
+    (0, class_validator_1.IsEmail)({}, { message: 'Informe um endereço de email válido' }),
+    (0, class_validator_1.MaxLength)(200, {
+        message: 'O endereço de email deve ter menos de 200 caracteres',
+    }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CriarJovemDto.prototype, "email", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Informe uma senha' }),
+    (0, class_validator_1.MinLength)(6, { message: 'A senha deve ter no mínimo 6 caracteres' }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CriarJovemDto.prototype, "senha", void 0);
 __decorate([
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Informe a confirmação de senha' }),
+    (0, class_validator_1.MinLength)(6, {
+        message: 'A confirmação de senha deve ter no mínimo 6 caracteres',
+    }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CriarJovemDto.prototype, "confirmacaoSenha", void 0);

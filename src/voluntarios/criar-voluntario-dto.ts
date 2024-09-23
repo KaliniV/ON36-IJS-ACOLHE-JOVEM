@@ -1,17 +1,13 @@
 import {
-  IsDate,
-  IsDateString,
   IsEmail,
-  IsEnum,
   IsNotEmpty,
   IsString,
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Genero } from './genero.enum';
-import { Type } from 'class-transformer';
+import { Especialidade } from './especialidade.enum';
 
-export class CriarJovemDto {
+export class CriarVoluntarioDto {
   @IsNotEmpty({ message: 'Informe o nome do usuário' })
   @IsString()
   nome: string;
@@ -36,13 +32,21 @@ export class CriarJovemDto {
   @IsString()
   confirmacaoSenha: string;
 
-  @IsNotEmpty()
-  @IsEnum(Genero)
-  genero: Genero;
+  @IsNotEmpty({ message: 'Informe os 7 números do CRP' })
+  conselhoRegionalDePsicologia: string;
 
-  @IsNotEmpty()
-  @IsString()
-  @IsDateString()
-  @Type(() => String)
-  dataNascimento: string;
+  @IsNotEmpty({ message: 'Informe a especialidade' })
+  especialidade: Especialidade;
+
+  @IsNotEmpty({ message: 'Informe a abordagem terapêutica' })
+  abordagem: string;
+
+  @IsNotEmpty({ message: 'Informe com detalhes sua esperiência' })
+  experiencia: string;
+
+  @IsNotEmpty({ message: 'Informe com detalhes sua motivação' })
+  motivacao: string;
+
+  @IsNotEmpty({ message: 'Informe sua disponibilidade com "X horas"' })
+  disponibilidadeSemanal: string;
 }
