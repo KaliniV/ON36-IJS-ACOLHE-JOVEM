@@ -1,27 +1,25 @@
 version: '3.8'
 services:
-app:
-  build:
-    context: .
-    dockerfile: Dockerfile
-  container_name: acolhe_jovem_app_container
-  environment:
-    - DB_HOST=${DB_HOST}
-    - DB_PORT=${DB_PORT}
-    - DB_USER=${DB_USER}
-    - DB_PASSWORD=${DB_PASSWORD}
-    - DB_DATABASE=${DB_DATABASE}
-  ports:
-    - '3000:3000'
-  depends_on:
-    - db
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: acolhe_jovem_app_container
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_DATABASE=${DB_DATABASE}
+    ports:
+      - '3000:3000'
 
-db:
-  image: postgres:12.20-alpine3.20
-  container_name: acolhe_jovem_postgres_container
-  environment:
-    - POSTGRES_DB=DB_DATABASE
-    - POSTGRES_USER=DB_USER
-    - POSTGRES_PASSWORD=DB_PASSWORD
-  ports:
-    - '6001:5432' # Porta do host 6000 mapeada para a porta 5432 do contêiner (PostgreSQL)
+  db:
+    image: postgres:12.20-alpine3.20
+    container_name: acolhe_jovem_postgres_container
+    environment:
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - '6001:5432'
