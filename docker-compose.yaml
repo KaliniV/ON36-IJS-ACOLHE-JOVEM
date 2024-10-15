@@ -1,25 +1,35 @@
 version: '3.8'
-services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: acolhe_jovem_app_container
-    environment:
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_DATABASE=${DB_DATABASE}
-    ports:
-      - '3000:3000'
 
-  db:
-    image: postgres:12.20-alpine3.20
+services:
+  postgres:
+    image: postgres:13
     container_name: acolhe_jovem_postgres_container
     environment:
-      - POSTGRES_DB=${DB_DATABASE}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      POSTGRES_DB: acolhe_jovem
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
     ports:
-      - '6001:5432'
+      - '5432:5432'
+    networks:
+      - acolhe_jovem_network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    image: kalini/acolhe-jovem-deploy
+    container_name: acolhe_jovem_app_container
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: 'postgresql://postgres:123456@acolhe_jovem_postgres_container:5432/acolhe_jovem?schema=public'
+    ports:
+      - '3000:3000'
+    networks:
+      - acolhe_jovem_network
+
+networks:
+  acolhe_jovem_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
