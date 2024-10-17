@@ -1,3 +1,15 @@
+#ACOLHE-JOVEM#
+
+Esta aplicação foi desenvolvida com NestJS e documentada com Swagger para gerenciar o cadastro e exibição de psicólogos voluntários que oferecem atendimento gratuito a jovens. A plataforma facilita o acesso ao e-mail dos profissionais para que os jovens possam entrar em contato e marcar sessões de terapia online diretamente.
+
+##Sobre o Acolhe-jovem##
+Este projeto tem como objetivo ajudar jovens de baixa renda a encontrarem atendimento psicológico gratuito, conectando-os com psicólogos que atuam como voluntários. O sistema não realiza os atendimentos diretamente, mas exibe o e-mail dos profissionais, permitindo que os jovens entrem em contato com os psicólogos para combinar horários e disponibilidade das consultas.
+
+Além de oferecer suporte psicológico a quem precisa, o projeto também cria uma oportunidade para psicólogos recém-formados ou em formação ganharem experiência prática, ajudando uma causa social importante.
+
+##Arquitetura e Abordagem##
+A aplicação foi construída utilizando NestJS para fornecer uma estrutura modular e escalável, e a documentação da API foi gerada com Swagger, garantindo facilidade de uso para desenvolvedores e colaboradores. A arquitetura foi pensada para facilitar a manutenção e expansão da aplicação no futuro.
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
