@@ -9,18 +9,23 @@ import {
 import { Genero } from '../enums/genero.enum';
 import * as bcrypt from 'bcrypt';
 import { BadRequestException } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
 @Entity()
 @Unique(['email'])
 export class Jovem {
+  @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @ApiProperty()
   @Column({ nullable: false, type: 'varchar', length: 200 })
   nome: string;
 
+  @ApiProperty()
   @Column({ nullable: false, type: 'varchar', length: 200 })
   email: string;
 
+  @ApiProperty()
   @Column({ nullable: false, default: true })
   status: boolean;
 
@@ -31,20 +36,25 @@ export class Jovem {
     type: 'enum',
     enum: Genero,
   })
+  @ApiProperty({ enum: Genero, enumName: 'Genero' })
   genero: Genero;
 
+  @ApiProperty()
   @Column({
     type: 'date',
     nullable: false,
   })
   dataNascimento: Date;
 
+  @ApiProperty()
   @Column({ nullable: false })
   criptografia: string;
 
+  @ApiProperty()
   @CreateDateColumn()
   criadoEm: Date;
 
+  @ApiProperty()
   @UpdateDateColumn()
   atualizadoEm: Date;
 

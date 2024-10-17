@@ -14,12 +14,13 @@ require('dotenv').config();
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST,
+      host: process.env.DB_HOST === 'db' ? 'db' : 'localhost',
       port: parseInt(process.env.DB_PORT),
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       entities: [Jovem, Voluntario],
+
       // esta construindo o banco sem o migration
       synchronize: true,
     }),

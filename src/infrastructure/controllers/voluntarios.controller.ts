@@ -12,18 +12,21 @@ import { VoluntariosService } from '../../application/services/voluntarios.servi
 import { AtualizarVoluntarioDto } from '../../application/dtos/atualizar-voluntario-dto';
 import { CadastrarVoluntarioDto } from 'src/application/dtos/cadastrar-voluntario-dto';
 import { Voluntario } from 'src/domain/entities/voluntario.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 @Controller('voluntarios')
 @ApiTags('Voluntário')
 export class VoluntariosController {
   constructor(private voluntariosService: VoluntariosService) {}
 
-  @Get()
-  async listarTodos(): Promise<string | Voluntario[]> {
-    return this.voluntariosService.exibirTodos();
-  }
-
   @Post('/cadastrar-voluntario')
+  @ApiOperation({
+    summary: 'Cadastra um novo profissional voluntariado - fornece o ID',
+  })
+  @ApiResponse({
+    status: 201,
+    description: 'Mensagem de cadastrado com sucesso + id',
+    type: Voluntario,
+  })
   async cadastrarVoluntario(
     @Body() cadastrarVoluntarioDto: CadastrarVoluntarioDto,
   ) {
@@ -35,7 +38,26 @@ export class VoluntariosController {
       id: cadastrado.id,
     };
   }
+
+  @Get()
+  @ApiOperation({ summary: 'Visualização de voluntários disponíveis' })
+  @ApiResponse({
+    status: 200,
+    description: 'Lista de profissionais disponíveis (status=true)',
+  })
+  async listarTodos(): Promise<string | Voluntario[]> {
+    return this.voluntariosService.exibirTodos();
+  }
+
   @Patch('atualizar-voluntario/:id')
+  @ApiOperation({
+    summary: 'Atualiza os dados dados do voluntário',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Mensagem de modificado com sucesso + dados atualizados',
+    type: Voluntario,
+  })
   async atualizarVoluntarioPorId(
     @Param('id') id: string,
     @Body() atualizarVoluntarioDto: AtualizarVoluntarioDto,
@@ -56,6 +78,13 @@ export class VoluntariosController {
   }
 
   @Delete('deletar-voluntario/:id')
+  @ApiOperation({
+    summary: 'Altera o status do usuário - status=false',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Mensagem de deletado com sucesso',
+  })
   async deletarPorCredencial(@Param('id') id: string) {
     const voluntarioDeletado = await this.voluntariosService.deletarPorId(id);
     return {
