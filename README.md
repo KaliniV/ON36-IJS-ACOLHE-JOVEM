@@ -35,46 +35,46 @@ A aplicação segue a **Arquitetura Hexagonal**, ou **Ports and Adapters**, que 
 ### Arquitetura Hexagonal (Ports and Adapters)
 
 ```plaintext
-             +--------------------+       +--------------------+       +--------------------+
-             |   Partner API      |       |      REST API      |       |         DB         |
-             +--------------------+       +--------------------+       +--------------------+
-                     |                        |                        |
-                     v                        v                        v
+             +--------------------+                      +--------------------+
+             |         DB         |                      |      REST API      |
+             +--------------------+                      +--------------------+
+                     |                                               |
+                     v                                               v
              +---------------------------------------------------------------+
-             |                          Portas                                |
+             |                          Portas                               |
              |---------------------------------------------------------------|
-             |  - jovem-repository.port.ts                                    |
-             |  - voluntario-repository.port.ts                               |
+             |  - jovem-repository.port.ts                                   |
+             |  - voluntario-repository.port.ts                              |
              +---------------------------------------------------------------+
                      |                        |                        |
                      v                        v                        v
 +-------------------------------------------------------------------------------------------+
-|                                       Núcleo (Domínio)                                     |
+|                                       Núcleo (Domínio)                                    |
 |-------------------------------------------------------------------------------------------|
-|  - Entities (jovem.entity.ts, voluntario.entity.ts)                                        |
-|  - Enums (abordagem.enum.ts, genero.enum.ts, especialidade.enum.ts)                        |
+|  - Entities (jovem.entity.ts, voluntario.entity.ts)                                       |
+|  - Enums (abordagem.enum.ts, genero.enum.ts, especialidade.enum.ts)                       |
 +-------------------------------------------------------------------------------------------+
                      |                        |                        |
                      v                        v                        v
              +---------------------------------------------------------------+
-             |                       Adaptadores                              |
+             |                       Adaptadores                             |
              |---------------------------------------------------------------|
-             |  Controllers:                                                  |
-             |     - jovens.controller.ts                                     |
-             |     - voluntarios.controller.ts                                |
+             |  Controllers:                                                 |
+             |     - jovens.controller.ts                                    |
+             |     - voluntarios.controller.ts                               |
              |                                                               |
-             |  Services:                                                     |
-             |     - jovens.service.ts                                        |
-             |     - voluntarios.service.ts                                   |
+             |  Services:                                                    |
+             |     - jovens.service.ts                                       |
+             |     - voluntarios.service.ts                                  |
              |                                                               |
-             |  Repositories:                                                 |
-             |     - jovem.repository.ts                                      |
-             |     - voluntario.repository.ts                                 |
+             |  Repositories:                                                |
+             |     - jovem.repository.ts                                     |
+             |     - voluntario.repository.ts                                |
              |                                                               |
-             |  DTOs:                                                         |
-             |     - atualizar-jovem.dto.ts                                   |
-             |     - cadastrar-jovem.dto.ts                                   |
-             |     - cadastrar-voluntario.dto.ts                              |
+             |  DTOs:                                                        |
+             |     - atualizar-jovem.dto.ts                                  |
+             |     - cadastrar-jovem.dto.ts                                  |
+             |     - cadastrar-voluntario.dto.ts                             |
              +---------------------------------------------------------------+
 ```
 
@@ -130,7 +130,8 @@ A aplicação segue a **Arquitetura Hexagonal**, ou **Ports and Adapters**, que 
 
    ```bash
    git clone https://github.com/KaliniV/ON36-IJS-ACOLHE-JOVEM
-   cd acolhejovem
+   cd ON36-IJS-ACOLHE-JOVEM
+
    ```
 
 2. Instale as dependências:
@@ -142,17 +143,20 @@ A aplicação segue a **Arquitetura Hexagonal**, ou **Ports and Adapters**, que 
 3. Configure as variáveis de ambiente no arquivo `.env`. Exemplo:
 
    ```bash
-    DATABASE_HOST=localhost
-    DATABASE_PORT=5432
-    DATABASE_USER=postgres
-    DATABASE_PASSWORD=admin
-    DATABASE_NAME=acolhejovem`
+    DB_HOST='acolhe_jovem_postgres_container'
+    DB_PORT='5432'
+    DB_USER='postgres'
+    DB_PASSWORD='123456'
+    DB_DATABASE='acolhe_jovem'
+    DATABASE_URL="postgresql://postgres:123456@acolhe_jovem_postgres_container:5432/acolhe_jovem?schema=public"
    ```
 
 4. Execute o Docker:
 
    ```bash
+
    docker compose up -d --build
+
    ```
 
 5. Inicie o servidor:
