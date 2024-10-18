@@ -5,6 +5,7 @@
 # AcolheJovem
 
 </div>
+
 **AcolheJovem** é uma aplicação que tem como objetivo conectar adolescentes a profissionais voluntários que oferecem suporte psicológico gratuito. O projeto busca criar um ambiente seguro onde adolescentes entre 13 e 17 anos possam acessar informações sobre psicólogos disponíveis e seus contatos para marcar uma consulta.
 
 ## Índice
