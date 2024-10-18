@@ -171,10 +171,6 @@ A aplicação utiliza **PostgreSQL** como banco de dados, gerenciado via **TypeO
 
 A documentação completa das rotas da API está disponível via **Swagger**. Após iniciar o servidor, você pode acessar a documentação no seguinte endpoint:
 
-bash
-
-Copiar código
-
 `http://localhost:3001/api#/`
 
 ### Exemplos de Rotas:
@@ -211,12 +207,6 @@ As rotas da API estão separadas em dois grupos principais: **Jovens** e **Volun
 A aplicação foi implantada na AWS utilizando **EC2** e **Docker**. A documentação da API pode ser acessada no link:
 
 - **URL da API**: [AcolheJovem API - AWS](http://54.233.35.72:3001/api#)
-
----
-
-## Link para o repositório no GitHub
-
-- [AcolheJovem - Repositório GitHub](https://github.com/KaliniV/ON36-IJS-ACOLHE-JOVEM)
 
 ---
 
