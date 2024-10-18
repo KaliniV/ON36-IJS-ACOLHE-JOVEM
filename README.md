@@ -159,12 +159,7 @@ A aplicação segue a **Arquitetura Hexagonal**, ou **Ports and Adapters**, que 
 
    ```
 
-5. Inicie o servidor:
-   ```bash
-    npm run start:dev
-   ```
-
-O servidor estará rodando em: `http://localhost:3001`.
+   O servidor estará rodando em: `http://localhost:3001`.
 
 ---
 
